@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш сайт</title>
+    <!-- Підключення зовнішніх стилів CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Внутрішні стилі CSS для цього файлу -->
+    <style>
+        /* Загальні стилі сторінки */
+        body {
+            background-color: #f3f0ec;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Comfortaa', sans-serif;
+        }
+        body {
+            background-color: #f3f0ec;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        /* Стилі для верхнього блоку (шапки) */
+        header {
+            background-color: #fff;
+            padding: 10px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+            padding: 5px 0;
+        }
+
+        .submenu a:hover {
+            background-color: #eee;
+        }
+
+        nav ul li:hover .submenu {
+            display: block;
+        }
+
+        /* Стилі для головного контейнера */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Стилі для головного зображення */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 60vh;
+            background-size: auto 100%;
+            cursor: pointer;
+            background: linear-gradient(to bottom, rgba(17, 11, 11, 0.945), rgba(194, 187, 187, 0.6));
+        }
+
+        /* Стилі для текстового контейнера */
+        .text-container {
+            width: 80%;
+            padding: 20px;
+            font-size: 25px;
+            font-family: 'Didact Gothic', sans-serif;
+            color: #000000;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Стилі для другого зображення та тексту */
+        .second-image {
+            display: flex;
+            align-items: center;
+            justify-content: space between;
+            position: relative;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(238, 203, 217, 0.103));
+        }
+
+        .second-image img {
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .second-text {
+            font-size: 25px;
+            color: #000000;
+            text-align: center;
+            width: 50%;
+        }
+
+        /* Стилі для блоків змісту, які за замовчуванням приховані */
+        .content {
+            display: none;
+        }
+
+        /* Стилі для активного блоку змісту */
+        .active {
+            display: block;
+        }
+
+        /* Стилі для малих зображень */
+        .small-image {
+            max-width: 100%;
+            height: auto;
+            background: linear-gradient(to bottom, rgba(214, 205, 205, 0.945), rgba(14, 13, 13, 0.822));
+        }
+
+        /* Стилі для блоку послуг */
+        .service-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 60vh;
+        }
+
+        /* Медіа-запит для екранів ширше 768px */
+        @media (min-width: 768px) {
+            .image-container {
+                height: 70vh;
+            }
+
+            .text-container {
+                font-size: 28px;
+            }
+            /* Додаткові стилі для більших екранів */
+        }
+
+        /* Медіа-запит для екранів ширше 1024px */
+        @media (min-width: 1024px) {
+            .text-container {
+                font-size: 30px;
+            }
+            /* Додаткові стилі для ще більших екранів */
+        }
+
+        /* Стилі для контейнера з відгуками */
+        .review-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Стилі для окремого відгуку */
+        .review {
+            display: none;
+            max-width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+        }
+
+        /* Стилі для виділеного активного відгуку */
+        .review.active {
+            display: block;
+        }
+
+        <style>
+    /* Ваші існуючі стилі */
+
+    /* Стилі для пошукового поля та кнопки */
+    .search-bar {
+            display: flex;
+            align-items: center;
+    }
+
+    #search-input {
+        width: 300px; /* Ширина поля пошуку */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    #search-button {
+        background-color: #212325; /* Колір кнопки "Пошук" */
+        color: #f3dfdf;
+        border: none;
+        border-radius: 15px;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    #search-button:hover {
+        background-color: #a7abaf; /* Змінюємо колір кнопки при наведенні */
+    }
+
+     <style>
+    /* Стилі для кнопок "Попередній відгук" та "Наступний відгук" */
+    button {
+        padding: 10px 15px;
+        background-color: #212325;
+        color: #f3dfdf;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s; /* Додавання плавного переходу для коліру фону */
+    }
+
+    button:hover {
+        background-color: #a7abaf; /* Змінюємо колір кнопки при наведенні */
+    }
+
+    /* Стилі для стрілки "Прокрутити вгору" */
+    #scroll-to-top {
+        position: fixed;
+        bottom: 20px; /* Відстань від нижнього краю сторінки */
+        right: 20px; /* Відстань від лівого краю сторінки */
+        font-size: 30px; /* Збільшуємо розмір шрифту */
+        cursor: pointer;
+        display: none; /* По замовчуванню ховаємо стрілку */
+        background-color: #212325;
+        color: #f3dfdf;
+        border: none;
+        border-radius: 100%; /* Округлюємо форму */
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+
+    #scroll-to-top:hover {
+        background-color: #a7abaf;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 30% auto;
+        padding: 50px;
+        border: 1px solid #888;
+        width: 50%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .close:hover {
+        color: black;
+        text-decoration: none;
+    }
+/* Загальні стилі для малих екранів (максимальна ширина 768px) */
+@media (max-width: 768px) {
+            /* Стилі для малих екранів */
+        }
+
+        /* Медіа-запит для екранів ширше 768px (наприклад, планшетів і десктопів) */
+        @media (min-width: 769px) {
+            /* Стилі для більших екранів */
+        }
+
+        /* Стилі для обрізаної кнопки "Зареєструватися" */
+button {
+    padding: 10px 15px;
+    background-color: #212325;
+    color: #f3dfdf;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+button:hover {
+    background-color: #a7abaf;
+}
+
+#home .image-container img {
+    transition: transform 0.8s ease-in-out, filter 0.8s ease-in-out;
+}
+
+#home .image-container:hover img {
+    transform: scale(1.2); /* Збільшення фото */
+    filter: brightness(70%); /* Затемнення */
+}
+</style>
+
+
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa|Didact+Gothic&display=swap">
+    <script>
+        function showTab(tabId) {
+            var tabs = document.querySelectorAll('.content');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = 'none';
+            }
+            var tabToShow = document.getElementById(tabId);
+            tabToShow.style.display = 'block';
+        }
+
+        var currentReview = 0;
+        var reviews = document.querySelectorAll('.review');
+
+        function showReview(index) {
+            reviews[currentReview].classList.remove('active');
+            currentReview = index;
+            if (currentReview < 0) {
+                currentReview = reviews.length - 1;
+            } else if (currentReview >= reviews.length) {
+                currentReview = 0;
+            }
+            reviews[currentReview].classList.add('active');
+        }
+
+        function prevReview() {
+            showReview(currentReview - 1);
+        }
+
+        function nextReview() {
+            showReview(currentReview + 1);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="showTab('home')">Головна</a>
+                    <div class="submenu">
+                        <a href="javascript:void(0);" onclick="showTab('services')">Послуги</a>
+                        <a href="javascript:void(0);" onclick="showTab('price')">Прайс</a>
+                        <a href="javascript:void(0);" onclick="showTab('contacts')">Контакти</a>
+                        <a href="javascript:void(0);" onclick="showTab('reviews')">Відгуки</a>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0);" onclick="showTab('services')">Послуги</a></li>
+                <li><a href="javascript:void(0);" onclick="showTab('price')">Прайс</a></li>
+                <li><a href="javascript:void(0);" onclick="showTab('contacts')">Контакти</a></li>
+                <li><a href="javascript:void(0);" onclick="showTab('reviews')">Відгуки</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Пошук">
+            <button id="search-button" onclick="performSearch()">Пошук</button>
+        </div>
+    </header>
+    
+    <div id="home" class="content active">
+        <div class="image-container">
+            <img src="https://i.pinimg.com/564x/b5/6f/e5/b56fe50c055a67c74f9cc59ceebf8553.jpg" alt="Зображення 1" id="image" />
+        </div>
+        <p style="font-size: 25px">У "The Beauti Room" ми прагнемо допомогти вам виявити та виразити цю неповторну красу. Наша команда досвідчених фахівців пропонує широкий спектр послуг, призначених для підкреслення вашої природної привабливості</p>
+        <div class="second-image">
+            <div class="gradient-overlay"></div>
+            <img src="https://i.pinimg.com/564x/3a/e1/67/3ae167b79423b4e46804db73d27f4bc8.jpg" alt="Зображення 2" />
+            <div class="second-text">
+                <p style="font-size: 25px">Ти унікальна, і саме тому ми працюємо із кожним клієнтом індивідуально. Ваші побажання та потреби - наш пріоритет, і ми завжди готові вас вислухати та допомогти вам досягти бажаного результату.</p>
+            </div>
+        </div>
+        <h2>Про нас</h2>
+        <p style="font-size: 25px">Ласкаво просимо до "The Beauti Room" - студії краси, де ми допомагаємо виявити та виразити вашу неповторну красу".</p>
+        <img src="https://i.pinimg.com/564x/88/27/33/882733285529db7d3f9d159d3fa61664.jpg" alt="Зображення 4" class="small-image">
+    </div>
+    <div id="services" class="content">
+        <h2>Послуги салону</h2>
+        <img src="https://i.pinimg.com/736x/46/74/73/4674738ce4dc9500d2f17338647559c1.jpg" alt="Зображення послуг" style="max-width: 100%; height: auto;">
+        <!-- Ваш текст та зображення тут -->
+    </div>
+    <div id="price" class="content">
+        <h2 style="text-align: center; margin-top: 20px;">Прайс</h2>
+        <img src="https://i.pinimg.com/564x/33/ef/94/33ef942e266f012ef560d631fd597787.jpg" alt="Фото 5" style="max-width: 100%; height: auto;">
+        <!-- Тут може бути ваш текст щодо цін та послуг -->
+    </div>
+    <div id="contacts" class="content">
+        <h2 style="text-align: center; margin-top: 40px; font-size: 50px;">Контакти</h2>
+        <h2>Як з нами зв`язатися</h2>
+        <p>Ми завжди готові відповісти на ваші запитання та надати додаткову інформацію.</p>
+        
+        <div class="contact-info">
+            <p>Адреса: вул. Головна, 123, м. Київ</p>
+            <p>Телефон: +380972567056</p>
+            <p>Email: beautiroom27@gmail.com</p>
+            <p>Instagram: beauti._room._27 </p>
+        </div>
+        
+        <p>Графік роботи:</p>
+        <ul>
+            <li>Понеділок-п'ятниця: 9:00 AM - 7:00 PM</li>
+            <li>Субота: 10:00 AM - 5:00 PM</li>
+            <li>Неділя: Вихідний</li>
+        </ul>
+        
+        <p>Не соромтесь зв'язатися з нами для запису або отримання консультації.</p>
+    </div>
+    
+    </div>
+    <div id="reviews" class="content">
+        <h2>Відгуки клієнтів</h2>
+        <div class="review-container">
+            <div class="review-box active">
+                <p>Анна: Мені сподобалось обслуговування в "The Beauti Room". Професійний підхід та приємна атмосфера. Обов'язково повернусь!</p>
+            </div>
+            <div class="review-box">
+                <p>Ольга: Вражена послугами салону. Вибір послуг широкий, і результат завжди відмінний. Рекомендую!</p>
+            </div>
+            <div class="review-box">
+                <p>Вікторія: Я задоволена своєю стрижкою та макіяжем. Фахівці салону дійсно знають свою справу.</p>
+            </div>
+            <div class="review-box">
+                <p>Зоряна: Це місце, де ви почуєте себе особливою. Дякую "The Beauti Room" за чудовий сервіс.</p>
+            </div>
+            <div class "review-box">
+                <p>Катерина: Спробуйте послуги салону, і ви не пошкодуєте. Це справжня "краса кімната".</p>
+            </div>
+        </div>
+        <button onclick="prevReview()">Попередній відгук</button>
+        <button onclick="nextReview()">Наступний відгук</button>
+    </div>
+</div>
+    <div id="registration-form">
+        <h2>Реєстрація</h2>
+        <label for="login">Логін:</label>
+        <input type="text" id="login" name="login" placeholder="Ваш логін" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" required title="Будь ласка, введіть коректний логін у форматі електронної пошти">
+    
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" placeholder="Ваш пароль">
+    
+        <button onclick="register()">Зареєструватися</button>
+    </div>
+    
+
+<!-- Опитувальник -->
+<div id="questionnaire">
+    <p>Оцініть якість обслуговування:</p>
+
+    <label for="quality-good">Добре
+        <input type="radio" id="quality-good" name="quality" value="good">
+    </label>
+
+    <label for="quality-poor">Погано
+        <input type="radio" id="quality-poor" name="quality" value="poor">
+    </label>
+
+    <button onclick="submitQuestionnaire()">Відправити</button>
+</div>
+</div>
+
+<a href="#" id="scroll-to-top" title="Прокрутити вгору">↑</a>
+
+<script>
+    var scrollToTopButton = document.getElementById("scroll-to-top");
+
+    // Функція, що прокручує сторінку вгору
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // Додає плавну анімацію прокрутки
+        });
+    }
+
+    // Додамо обробник кліку на стрілку
+    scrollToTopButton.addEventListener("click", scrollToTop);
+
+    // Показуємо або ховаємо стрілку в залежності від положення сторінки
+    window.addEventListener("scroll", function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            scrollToTopButton.style.display = "block";
+        } else {
+            scrollToTopButton.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>
+    <script>
+  
+        var currentReview = 0;
+        var reviewBoxes = document.querySelectorAll('.review-box');
+      
+        function showReview(index) {
+            reviewBoxes[currentReview].classList.remove('active');
+            reviewBoxes[index].classList.add('active');
+            currentReview = index;
+        }
+      
+        function nextReview() {
+            var nextIndex = currentReview + 1;
+            if (nextIndex >= reviewBoxes.length) {
+                nextIndex = 0;
+            }
+            showReview(nextIndex);
+        }
+      
+        function prevReview() {
+            var prevIndex = currentReview - 1;
+            if (prevIndex < 0) {
+                prevIndex = reviewBoxes.length - 1;
+            }
+            showReview(prevIndex);
+        }
+      
+        var modal = document.getElementById('modal');
+      
+        function openModal() {
+            modal.style.display = 'block';
+        }
+      
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+      </script>
+      
+    <footer>
+        <p>&copy; Студія краси "The Beauti Room"</p>
+    </footer>
+    </body>
+    </html> 
